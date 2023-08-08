@@ -1,0 +1,59 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  background-color: #242526;
+  height: 100%;
+  padding: 0 16px;
+  border-bottom: 1px solid #ffffff1e;
+}
+
+.nav > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.left-nav_container {
+  cursor: pointer;
+}
+
+.center-nav_container {
+  width: 330px;
+}
+
+.center-nav_container > span {
+  cursor: pointer;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.center-nav_container > span.active {
+  border-bottom: 3px solid #3892e4;
+  > svg {
+    fill: #3892e4;
+  }
+}
+
+.right-nav_container {
+  gap: 8px;
+}
+
+.right-icon_container > svg {
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 8px;
+  background: #333536;
+}
+.active.right-icon_container > svg {
+  background-color: #16273c;
+  fill: #3aa2ff;
+}
+
+/* ************ Aside Shortcut Bar **********  */
+
+.shortcut-container {
+  width: 200px;
+}

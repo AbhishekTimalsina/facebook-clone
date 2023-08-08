@@ -1,38 +1,88 @@
-.App {
-  text-align: center;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 62.5%;
+  font-family: Segoe UI Historic, Segoe UI, Helvetica, Arial, sans-serif;
+}
+:root {
+  --header-height: 56px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+.sticky-side_container {
+  position: sticky;
+  top: var(--header-height);
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  width: 100%;
+  padding: 7px;
+  gap: 4px;
+  height: calc(100vh - var(--header-height));
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.sticky-side_container::-webkit-scrollbar {
+  width: 14px;
+  background-color: #3a3b3c;
+  visibility: hidden;
+  transition: 1s all;
+}
+.sticky-side_container:hover::-webkit-scrollbar {
+  visibility: visible;
+}
+.sticky-side_container::-webkit-scrollbar-thumb {
+  transition: 1s all;
+  visibility: hidden;
+  border-radius: 6px;
+  background: #ffffff4d;
+  border-right: 3px #3a3b3c solid;
+  border-left: 3px #3a3b3c solid;
+}
+
+.sticky-side_container:hover::-webkit-scrollbar-thumb {
+  visibility: visible;
+}
+.header {
+  top: 0px;
+  width: 100%;
+  position: fixed;
+  height: var(--header-height);
+}
+.section-bottom {
+  padding-top: var(--header-height);
+  display: grid;
+  grid-template-columns: 20fr 60fr 20fr;
+  background-color: #18191a;
+}
+
+.user-icon > svg,
+.user-icon > svg.active {
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 8px;
+  background: #c9ccd1 !important;
+  fill: #fcfcfd !important;
+}
+
+.shortcut-item {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 16px;
+  font-weight: bold;
+}
+
+.shortcut-item {
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.shortcut-item .item-name {
   color: white;
+  font-size: 15px;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.shortcut-item:hover {
+  background-color: #3a3b3c;
 }

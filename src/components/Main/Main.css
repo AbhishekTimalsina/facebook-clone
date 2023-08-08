@@ -1,0 +1,142 @@
+.main {
+  width: 500px;
+  margin: 0px auto;
+  padding: 12px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.main .container {
+  background-color: #242526;
+  padding: 12px 16px 10px;
+  border-radius: 8px;
+}
+
+.upload-area {
+  display: flex;
+  gap: 10px;
+  border-bottom: 1px solid #ffffff1a;
+  padding-bottom: 12px;
+}
+.content-input {
+  border: none;
+  outline: none;
+  background-color: #3a3b3c;
+  font-size: 16px;
+  color: #b0b3b8;
+  height: 40px;
+
+  border-radius: 50px;
+  width: 100%;
+  padding: 10px;
+}
+
+.upload-action_area {
+  padding-top: 8px;
+  display: flex;
+}
+.upload-action_area > div {
+  flex-basis: 100%;
+  justify-content: center;
+}
+.upload-action_area p {
+  color: #acafb3 !important;
+  font-size: 15px;
+  font-weight: bold;
+}
+.action-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.action-text {
+  color: #acafb3;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.post-container {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.post-card_top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.post-top_left {
+  display: flex;
+  gap: 8px;
+  /* align-items: center; */
+}
+.post-card_bottom {
+  padding-top: 8px;
+}
+.post-creater {
+  font-weight: 500;
+  font-size: 16px;
+  color: #e4e6eb;
+}
+
+.upload-time {
+  color: #b0b3b8;
+  font-size: 10px;
+}
+.rigt-icon_wrapper {
+  display: flex;
+  gap: 12px;
+}
+.rigt-icon_wrapper span {
+  cursor: pointer;
+}
+
+.post-content_container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.post-text {
+  color: #e4e6eb;
+  font-size: 15px;
+}
+
+.interaction-container {
+  margin: 8px;
+  padding: 3px 0px;
+  display: flex;
+  border-top: 1px solid #abaeb342;
+  border-bottom: 1px solid #abaeb342;
+}
+.interaction {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 8px;
+  padding: 6px 0px;
+  cursor: pointer;
+}
+.interaction:hover {
+  background-color: #3a3b3c;
+}
+.interaction p {
+  font-size: 14px;
+  color: #abaeb3;
+  font-weight: 600;
+}
+
+.post-image {
+  background-clip: padding-box;
+  width: 500px;
+  align-self: center;
+  aspect-ratio: 2/4;
+  width: 500px;
+  max-height: 300px;
+}
