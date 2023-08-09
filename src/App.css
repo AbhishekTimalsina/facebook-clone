@@ -8,11 +8,14 @@
 :root {
   --header-height: 56px;
 }
+body:has(.edit) {
+  overflow: hidden;
+  min-height: 110vh;
+}
 
 .sticky-side_container {
   position: sticky;
   top: var(--header-height);
-
   width: 100%;
   padding: 7px;
   gap: 4px;
@@ -56,7 +59,15 @@
   grid-template-columns: 20fr 60fr 20fr;
   background-color: #18191a;
 }
-
+.section-bottom.edit::after {
+  content: "";
+  height: 500vh;
+  position: absolute;
+  top: var(--header-height);
+  width: 100%;
+  background-color: #0000008a;
+  z-index: 9999;
+}
 .user-icon > svg,
 .user-icon > svg.active {
   border: none;

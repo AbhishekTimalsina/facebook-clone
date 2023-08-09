@@ -11,7 +11,7 @@ import image from "../../assets/among.png";
 
 export const FriendList = () => {
   let friends = [];
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 18; i++) {
     friends.push(
       <ItemBar name={`friend ${i}`}>
         <User size="32px" color="white" weight="fill" />

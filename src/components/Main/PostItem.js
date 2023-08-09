@@ -1,8 +1,15 @@
 import React from "react";
 import { User, DotsThreeOutline, X, ThumbsUp, Chat } from "phosphor-react";
 
-export const PostItem = function ({ name, text, image }) {
+export const PostItem = function ({
+  name,
+  text,
+  image,
+  id,
+  postDeleteHandler,
+}) {
   function imageGenerator() {
+    console.log(text);
     if (image) {
       let imageParam = text.split(" ").splice(-2);
       let imageUrl = `${image}?${imageParam}`;
@@ -29,7 +36,7 @@ export const PostItem = function ({ name, text, image }) {
             <span>
               <DotsThreeOutline size="22px" color="#a8abaf" weight="fill" />
             </span>
-            <span>
+            <span onClick={() => postDeleteHandler(id)}>
               <X size="22px" color="#a8abaf" />
             </span>
           </span>

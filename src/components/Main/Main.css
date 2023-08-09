@@ -26,20 +26,25 @@
   font-size: 16px;
   color: #b0b3b8;
   height: 40px;
-
+  cursor: pointer;
   border-radius: 50px;
   width: 100%;
   padding: 10px;
+}
+.content-input:hover {
+  background-color: #484849;
 }
 
 .upload-action_area {
   padding-top: 8px;
   display: flex;
 }
-.upload-action_area > div {
+
+.upload-action_area > div.shortcut-item {
   flex-basis: 100%;
   justify-content: center;
 }
+
 .upload-action_area p {
   color: #acafb3 !important;
   font-size: 15px;
@@ -139,4 +144,103 @@
   aspect-ratio: 2/4;
   width: 500px;
   max-height: 300px;
+}
+
+/* Create post Section */
+
+.create-post_container {
+  position: absolute;
+  background-color: #242526;
+  width: 500px;
+  display: flex;
+  top: calc(var(--header-height) + 40px);
+  align-items: center;
+  flex-direction: column;
+  height: fit-content;
+  padding: 10px;
+  z-index: 10000;
+
+  border-radius: 10px;
+}
+.create-post_container h2 {
+  font-size: 22px;
+  color: white;
+  font-weight: bolder;
+}
+
+.create-post_container textarea {
+  width: 480px;
+  font-size: 18px;
+  font-weight: 500;
+  height: 300px;
+  background-color: #242526;
+  padding: 20px;
+  color: white;
+  outline: none;
+  border: none;
+}
+
+.create-post_container #auto-generate_box {
+  background-color: #3a3b3c;
+}
+.create-post_container label,
+.input-image_options p {
+  font-size: 12px;
+  font-weight: bolder;
+  color: #beb9b9;
+}
+.create-post_container button {
+  align-self: flex-end;
+  color: white;
+  width: 100%;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 2px 24px;
+  margin: 14px 0px;
+  background: #8b8989;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  cursor: not-allowed;
+}
+
+#input-file {
+  display: none;
+}
+label[for="input-file"] {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  gap: 5px;
+  justify-content: center;
+}
+
+.input-image_options {
+  display: flex;
+  width: 100%;
+}
+.input-image_options .image-options {
+  flex-basis: 100%;
+  gap: 5px;
+  justify-content: center;
+  cursor: pointer;
+}
+.image-options label {
+  user-select: none;
+}
+.create-post_container span {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ffffff60;
+  padding-bottom: 12px;
+}
+.create-post_container span svg {
+  cursor: pointer;
+}
+.create-post_container .post-active {
+  background-color: #1b6fbb;
+  pointer-events: initial;
+  cursor: pointer;
 }

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { User } from "phosphor-react";
-export const ItemBar = ({ name, children, type }) => {
+export const ItemBar = ({ name, children, type, event }) => {
   let placeHolderStyle = {
     height: "32px",
     width: "32px",
@@ -8,11 +8,8 @@ export const ItemBar = ({ name, children, type }) => {
     borderRadius: "50%",
   };
 
-  type && console.log(type);
-  // console.log(children && children.$$typeof);
-
   return (
-    <div className="shortcut-item">
+    <div className="shortcut-item" {...(event ? { onClick: event } : {})}>
       <span className={`${type ? type : "user"}-icon`}>
         {children || <div style={placeHolderStyle}></div>}
       </span>
