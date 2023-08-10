@@ -51,6 +51,7 @@ body:has(.edit) {
   top: 0px;
   width: 100%;
   position: fixed;
+  z-index: 1;
   height: var(--header-height);
 }
 .section-bottom {
@@ -63,7 +64,7 @@ body:has(.edit) {
   content: "";
   height: 500vh;
   position: absolute;
-  top: var(--header-height);
+  top: 0px;
   width: 100%;
   background-color: #0000008a;
   z-index: 9999;

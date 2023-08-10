@@ -6,15 +6,23 @@ export const PostItem = function ({
   text,
   image,
   id,
+  auto,
   postDeleteHandler,
+  impressions,
+  postImpressionsHandler,
 }) {
   function imageGenerator() {
-    console.log(text);
+    // check if user have selected image by themself and if user have put the auto image mode on
     if (image) {
+      return image;
+    }
+    if (auto) {
       let imageParam = text.split(" ").splice(-2);
-      let imageUrl = `${image}?${imageParam}`;
+
+      let imageUrl = `https://source.unsplash.com/random?${imageParam}`;
       return imageUrl;
     }
+    // return image;
   }
 
   return (
@@ -45,12 +53,17 @@ export const PostItem = function ({
       <div className="post-card_bottom">
         <div className="post-content_container">
           <p className="post-text">{text}</p>
-          {image && <img className="post-image" src={imageGenerator()} />}
+          {(image || auto) && ( // checks if auto or image is true and if it is true then generate the adds the image
+            <img className="post-image" src={imageGenerator()} />
+          )}
         </div>
         <div className="interaction-container">
-          <span className="interaction">
+          <span
+            className="interaction"
+            onClick={() => postImpressionsHandler(id)}
+          >
             <ThumbsUp size="20px" color="#abaeb3" weight="bold" />
-            <p>Like</p>
+            <p>Like ({impressions})</p>
           </span>
           <span className="interaction">
             <Chat size="20px" color="#abaeb3" weight="bold" />

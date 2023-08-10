@@ -142,8 +142,8 @@
   width: 500px;
   align-self: center;
   aspect-ratio: 2/4;
-  width: 500px;
-  max-height: 300px;
+  height: auto;
+  max-height: 400px;
 }
 
 /* Create post Section */
@@ -168,11 +168,24 @@
   font-weight: bolder;
 }
 
+.content-holder {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  height: 300px;
+  padding-bottom: 10px;
+}
+.content-holder > * {
+  flex-basis: 100%;
+}
+
 .create-post_container textarea {
-  width: 480px;
+  min-width: 480px;
+  max-width: 480px;
   font-size: 18px;
   font-weight: 500;
-  height: 300px;
+  max-height: 300px;
+  min-height: 160px;
   background-color: #242526;
   padding: 20px;
   color: white;
@@ -183,6 +196,7 @@
 .create-post_container #auto-generate_box {
   background-color: #3a3b3c;
 }
+
 .create-post_container label,
 .input-image_options p {
   font-size: 12px;
@@ -239,8 +253,36 @@ label[for="input-file"] {
 .create-post_container span svg {
   cursor: pointer;
 }
+
 .create-post_container .post-active {
-  background-color: #1b6fbb;
-  pointer-events: initial;
+  background-color: #0075ff;
   cursor: pointer;
+}
+/* **adding a event listener to after element  */
+
+.image-area {
+  width: min-content;
+  position: relative;
+  pointer-events: none;
+}
+/* .image-cross { */
+.image-area::after {
+  content: "X";
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  font-size: 10px;
+  border-radius: 50%;
+  background-color: black;
+  color: white;
+  height: 13px;
+  width: 13px;
+  padding: 4px;
+  user-select: none;
+  cursor: pointer;
+  transform: translate(50%, -50%);
+  display: flex;
+  pointer-events: all;
+  justify-content: center;
+  align-items: center;
 }
