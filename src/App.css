@@ -4,13 +4,21 @@
   box-sizing: border-box;
   font-size: 62.5%;
   font-family: Segoe UI Historic, Segoe UI, Helvetica, Arial, sans-serif;
+  text-decoration: none;
 }
 :root {
   --header-height: 56px;
 }
-body:has(.edit) {
+body:has(.create, .edit) {
   overflow: hidden;
   min-height: 110vh;
+}
+.post-card_container {
+  width: 500px;
+  position: relative;
+  background-color: #242526;
+  padding: 12px 16px 10px;
+  border-radius: 8px;
 }
 
 .sticky-side_container {
@@ -60,6 +68,7 @@ body:has(.edit) {
   grid-template-columns: 20fr 60fr 20fr;
   background-color: #18191a;
 }
+/* .section-bottom.create::after,
 .section-bottom.edit::after {
   content: "";
   height: 500vh;
@@ -68,7 +77,18 @@ body:has(.edit) {
   width: 100%;
   background-color: #0000008a;
   z-index: 9999;
+} */
+
+.header.edit,
+.header.create,
+.section-bottom.edit :is(.sticky-side_container, .post-container, .container),
+.section-bottom.create
+  :is(.sticky-side_container, .post-container, .container) {
+  filter: brightness(0.8);
+  pointer-events: none;
+  user-select: none;
 }
+
 .user-icon > svg,
 .user-icon > svg.active {
   border: none;

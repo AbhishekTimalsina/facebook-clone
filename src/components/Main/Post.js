@@ -5,13 +5,16 @@ export const Post = ({
   postContent,
   postDeleteHandler,
   postImpressionsHandler,
+  postEditHandler,
 }) => {
   const posts = postContent.map(function (pos) {
     return (
       <PostItem
+        key={pos.id}
         {...pos}
         postDeleteHandler={postDeleteHandler}
         postImpressionsHandler={postImpressionsHandler}
+        postEditHandler={postEditHandler}
       />
     );
   });

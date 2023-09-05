@@ -2,18 +2,20 @@ import React, { useContext } from "react";
 import { User, VideoCamera, Image } from "phosphor-react";
 import { CreatePost } from "./CreatePost.js";
 import { ItemBar } from "../ItemBar";
-import { ModeContext } from "../../App.js";
+import { ModeContext } from "../../layouts/RootLayout.js";
 
 export const Upload = ({ newPostHandler }) => {
   const [mode, setMode] = useContext(ModeContext);
 
   function changeModeEdit() {
-    setMode("edit");
+    setMode("create");
   }
 
   return (
     <>
-      {mode === "edit" && <CreatePost newPostHandler={newPostHandler} />}
+      {(mode == "create" || mode == "edit") && (
+        <CreatePost newPostHandler={newPostHandler} />
+      )}
       <div className="container">
         <div className="upload-area">
           <span className="user-icon">

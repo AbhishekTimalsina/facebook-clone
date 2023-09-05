@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { User } from "phosphor-react";
+import React from "react";
+
 export const ItemBar = ({ name, children, type, event }) => {
   let placeHolderStyle = {
     height: "32px",

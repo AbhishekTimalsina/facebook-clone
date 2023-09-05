@@ -1,26 +1,47 @@
-import React, { useState } from "react";
-import { Navbar } from "./components/Navbar/Navbar.js";
-import { ShortCutBar } from "./components/Shortcuts/Shortcuts.js";
-import { Main } from "./components/Main/Main.js";
-import { FriendList } from "./components/FriendList/FriendList.js";
-import "./App.css";
-import { createContext } from "react";
+// pages
 
-export const ModeContext = createContext();
+import { Home } from "./pages/home/Home";
+import { Signup } from "./pages/authenticaton/signup";
+import { Login } from "./pages/authenticaton/login";
+
+//Layout
+import { RootLayout } from "./layouts/RootLayout";
+import { AuthProvider } from "./context/AuthProvider";
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "react-router-dom";
+import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route>
+      <Route
+        path="/"
+        element={
+          <PrivateRoute>
+            <RootLayout />
+          </PrivateRoute>
+        }
+      >
+        <Route index element={<Home />} />
+        <Route path="friends" element={<div>Friends</div>} />
+        <Route path="games" element={<div>Games</div>} />
+      </Route>
+      <Route path="signup" element={<Signup />} />
+      <Route path="login" element={<Login />} />
+    </Route>
+  )
+);
 
 export const App = () => {
-  const [mode, setMode] = useState("");
-
   return (
     <>
-      <ModeContext.Provider value={[mode, setMode]}>
-        <Navbar />
-        <section className={`section-bottom ${mode}`}>
-          <ShortCutBar />
-          <Main />
-          <FriendList />
-        </section>
-      </ModeContext.Provider>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </>
   );
 };

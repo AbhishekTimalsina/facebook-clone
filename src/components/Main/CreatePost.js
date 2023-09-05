@@ -1,16 +1,22 @@
 import React, { useContext, useState, useRef } from "react";
 import { X, Image } from "phosphor-react";
-import { ModeContext } from "../../App.js";
+
+import { ModeContext } from "../../layouts/RootLayout.js";
+import { serverTimestamp } from "firebase/firestore";
+// custom hook
+import { useAuth } from "../../context/AuthProvider";
 
 export const CreatePost = ({ newPostHandler }) => {
   const textRef = useRef(null);
   const inputRef = useRef(null);
+  const { currentUser } = useAuth();
   const [postData, setPostData] = useState({
     text: "",
     image: null,
-    auto: true,
+    auto: false,
   });
   const [mode, setMode] = useContext(ModeContext);
+
   function inputHandler(e) {
     const { name, value, checked, type } = e.target;
 
@@ -24,17 +30,17 @@ export const CreatePost = ({ newPostHandler }) => {
 
   function postHandler() {
     if (!postData.text.length > 0) {
-      // console.log(textRef);
       textRef.current.focus();
       return;
     }
     const newPost = {
-      name: "You",
+      name: currentUser.displayName,
       text: postData.text,
       auto: postData.auto,
       image: postData.image,
-      id: crypto.randomUUID(),
+      createdAt: serverTimestamp(),
       impressions: 0,
+      authorId: currentUser.uid,
     };
 
     newPostHandler(newPost);
@@ -42,11 +48,11 @@ export const CreatePost = ({ newPostHandler }) => {
   }
   function addImageHandler(e) {
     let imageFile = e.target.files[0];
-    // postData.image = URL.createObjectURL(imageFile);
+
     const reader = new FileReader();
-    // let lol = imageFile.readAsDataURL(); //accepts as blob url but since blob lifespan is short we do base64(lack of server hehe)
-    // console.log(lol);
+
     reader.onload = function (e) {
+      console.log(reader.result);
       setPostData((prevData) => {
         return {
           ...prevData,
@@ -59,7 +65,7 @@ export const CreatePost = ({ newPostHandler }) => {
     reader.readAsDataURL(imageFile);
   }
 
-  function removeImageHandler() {
+  function removeImageHandler(e) {
     setPostData((prevData) => {
       return {
         ...prevData,
@@ -73,7 +79,7 @@ export const CreatePost = ({ newPostHandler }) => {
   return (
     <div className="create-post_container">
       <span>
-        <h2>Create Post</h2>
+        <h2>{mode} Post</h2>
         <X size="22px" color="#a8abaf" onClick={() => setMode("")} />
       </span>
       <div className="content-holder">
@@ -97,11 +103,11 @@ export const CreatePost = ({ newPostHandler }) => {
           <input
             type="file"
             id="input-file"
-            accept="image/png, image/jpeg, image/jpg"
+            accept="image/*"
             ref={inputRef}
             onChange={addImageHandler}
           />
-          <label for="input-file">
+          <label htmlFor="input-file">
             <Image size="24px" color="#45bd62" weight="fill" />
             <p>Add Photo</p>
           </label>
@@ -114,7 +120,7 @@ export const CreatePost = ({ newPostHandler }) => {
             checked={postData.auto}
             onChange={inputHandler}
           />
-          <label for="auto-generate_box">Auto Add Image</label>
+          <label htmlFor="auto-generate_box">Auto Add Image</label>
         </span>
       </div>
       <button

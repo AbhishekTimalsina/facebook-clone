@@ -77,8 +77,10 @@
   justify-content: space-between;
 }
 .post-top_left {
+  text-decoration: none;
   display: flex;
   gap: 8px;
+  cursor: pointer;
   /* align-items: center; */
 }
 .post-card_bottom {
@@ -92,7 +94,7 @@
 
 .upload-time {
   color: #b0b3b8;
-  font-size: 10px;
+  font-size: 14px;
 }
 .rigt-icon_wrapper {
   display: flex;
@@ -136,7 +138,9 @@
   color: #abaeb3;
   font-weight: 600;
 }
-
+.post-right {
+  position: relative;
+}
 .post-image {
   background-clip: padding-box;
   width: 500px;
@@ -145,11 +149,29 @@
   height: auto;
   max-height: 400px;
 }
+.post-write_place {
+  display: flex;
+  position: absolute;
+  top: 45px;
+  right: 30px;
+  background-color: #545659b5;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 6px;
+  cursor: pointer;
+  text-align: center;
+  color: white;
+  width: 100px;
+  min-width: fit-content;
+  border-radius: 4px;
+  margin: 0px auto;
+  justify-content: center;
+}
 
 /* Create post Section */
 
 .create-post_container {
-  position: absolute;
+  position: fixed;
   background-color: #242526;
   width: 500px;
   display: flex;
@@ -250,6 +272,9 @@ label[for="input-file"] {
   border-bottom: 1px solid #ffffff60;
   padding-bottom: 12px;
 }
+.create-post_container h2::first-letter {
+  text-transform: capitalize;
+}
 .create-post_container span svg {
   cursor: pointer;
 }
@@ -286,3 +311,10 @@ label[for="input-file"] {
   justify-content: center;
   align-items: center;
 }
+
+.liked p {
+  color: #2d86ff;
+}
+/* .liked:hover {
+  background-color: initial !important;
+} */

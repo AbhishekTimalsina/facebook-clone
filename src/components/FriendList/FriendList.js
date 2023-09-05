@@ -13,7 +13,7 @@ export const FriendList = () => {
   let friends = [];
   for (let i = 0; i < 18; i++) {
     friends.push(
-      <ItemBar name={`friend ${i}`}>
+      <ItemBar name={`friend ${i}`} key={i}>
         <User size="32px" color="white" weight="fill" />
       </ItemBar>
     );
