@@ -1,16 +1,15 @@
 {
   "files": {
-    "main.css": "/facebook-clone/static/css/main.a21d5e06.css",
+    "main.css": "/facebook-clone/static/css/main.c5358cb2.css",
     "main.js": "/facebook-clone/static/js/main.52b4e01c.js",
     "static/media/among.png": "/facebook-clone/static/media/among.315e79db0faa2047d8b0.png",
     "static/media/joystick.png": "/facebook-clone/static/media/joystick.0737a2b31073be3746e5.png",
-    "static/media/fb-logo.svg": "/facebook-clone/static/media/fb-logo.798ff419268bc0baf335.svg",
     "index.html": "/facebook-clone/index.html",
-    "main.a21d5e06.css.map": "/facebook-clone/static/css/main.a21d5e06.css.map",
+    "main.c5358cb2.css.map": "/facebook-clone/static/css/main.c5358cb2.css.map",
     "main.52b4e01c.js.map": "/facebook-clone/static/js/main.52b4e01c.js.map"
   },
   "entrypoints": [
-    "static/css/main.a21d5e06.css",
+    "static/css/main.c5358cb2.css",
     "static/js/main.52b4e01c.js"
   ]
 }
