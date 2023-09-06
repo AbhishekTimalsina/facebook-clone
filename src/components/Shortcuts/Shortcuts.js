@@ -6,7 +6,6 @@ import among from "../../assets/among.png";
 import game from "../../assets/joystick.png";
 
 import { useAuth } from "../../context/AuthProvider";
-import { Link } from "react-router-dom";
 
 export const ShortCutBar = () => {
   const { currentUser } = useAuth();

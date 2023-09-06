@@ -13,12 +13,15 @@ export const Signup = () => {
     name: "",
   });
   const [error, setError] = useState("");
+  const [requesting, setRequesting] = useState(false);
   const navigate = useNavigate();
   const { signIn } = useAuth();
 
   async function formHandler(e) {
     e.preventDefault();
+
     try {
+      setRequesting(true);
       let cred = await signIn(credential.email, credential.password);
       await updateProfile(getAuth().currentUser, {
         displayName: credential.name,
@@ -28,9 +31,13 @@ export const Signup = () => {
         bio: null,
         posts: null,
       });
+      setRequesting(false);
+
       navigate("/");
     } catch (e) {
+      console.error(e);
       setError(e.code);
+      setRequesting(false);
     }
     // signIn(credential.email, credential.password)
     //   .then((cred) => {
@@ -94,10 +101,12 @@ export const Signup = () => {
             onChange={credentialHandler}
             required
           />
-          <button className="auth-btn">Signup</button>
+          <button className={`auth-btn ${requesting ? "disabled" : ""}`}>
+            Signup
+          </button>
         </form>
         {error && <div className="auth-error">{error}</div>}
-        <div className="auth-bottom">
+        <div className={`auth-bottom ${requesting ? "disabled" : ""}`}>
           <Link to="/login">Login</Link>
         </div>
       </div>

@@ -118,3 +118,9 @@ body:has(.create, .edit) {
 .shortcut-item:hover {
   background-color: #3a3b3c;
 }
+
+
+.disabled {
+  opacity: .6;
+  pointer-events: none;
+}

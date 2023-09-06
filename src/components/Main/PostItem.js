@@ -6,6 +6,7 @@ import { ModeContext } from "../../layouts/RootLayout.js";
 import { getDoc, doc } from "firebase/firestore";
 
 import { db } from "../../config/firebase.js";
+import { getDownloadURL, getStorage, ref } from "firebase/storage";
 
 export const PostItem = function ({
   name,
@@ -23,12 +24,31 @@ export const PostItem = function ({
   const [mode, setMode] = useContext(ModeContext);
   const [isLiked, setIsLiked] = useState(false);
   const [taskType, setTaskType] = useState("");
+  const [postImage, setPostImage] = useState(null);
 
   useEffect(() => {
-    (async function hello() {
-      let docRef = doc(db, "posts", id, "liked", currentUser.uid);
-      let docum = await getDoc(docRef);
-      if (docum.exists()) setIsLiked(true);
+    if (!image) return;
+    (async function Invoke() {
+      try {
+        const storage = getStorage();
+        const storageRef = ref(storage, `images/${image}`);
+        const url = await getDownloadURL(storageRef);
+        setPostImage(url);
+      } catch (e) {
+        console.log(e);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async function Invoke() {
+      try {
+        let docRef = doc(db, "posts", id, "liked", currentUser.uid);
+        let docum = await getDoc(docRef);
+        if (docum.exists()) setIsLiked(true);
+      } catch (e) {
+        console.log(e);
+      }
     })();
   }, []);
 
@@ -51,7 +71,7 @@ export const PostItem = function ({
     // check if user have selected image by themself and if user haven't put the auto image mode on
 
     if (image) {
-      return image;
+      return postImage;
     }
     if (auto) {
       let imageParam = text.split(" ").splice(-2);
@@ -61,7 +81,6 @@ export const PostItem = function ({
     }
   }
 
-  console.log("PostItem render hai");
   return (
     <div className="post-card_container container">
       <div className="post-card_top">

@@ -18,6 +18,7 @@ import {
   getDoc,
   setDoc,
   serverTimestamp,
+  getDocs,
 } from "firebase/firestore";
 
 export const Main = () => {
@@ -39,7 +40,7 @@ export const Main = () => {
 
     return () => unsubscribe();
   }, []);
-  console.log(posts);
+
   async function deletePost(id) {
     try {
       const docRef = doc(db, "posts", id);
@@ -47,7 +48,6 @@ export const Main = () => {
       let { authorId } = postData.data();
 
       if (!(currentUser.uid === authorId)) {
-        console.log("Can't delete this");
         return;
       }
       await deleteDoc(docRef);
@@ -57,7 +57,11 @@ export const Main = () => {
   }
 
   async function addPost(newPost) {
-    let addedPost = await addDoc(collectionRef, newPost);
+    try {
+      let addedPost = await addDoc(collectionRef, newPost);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   async function impressionHandler(id, isLiked) {
@@ -81,7 +85,11 @@ export const Main = () => {
         updateDoc(docRef, { impressions: post.impressions + 1 })
       );
     }
-    await Promise.all(promiseArray);
+    try {
+      await Promise.all(promiseArray);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   // ** might get deleted
@@ -114,7 +122,9 @@ export const Main = () => {
     <main className="main">
       <Upload newPostHandler={addPost} />
       {posts.length < 1 ? (
-        <div style={{ color: "white", fontSize: "30px" }}> Cargando ...</div>
+        <div style={{ color: "white", fontSize: "30px", textAlign: "center" }}>
+          Loading ...
+        </div>
       ) : (
         <Post
           postContent={posts}

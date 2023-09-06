@@ -9,16 +9,22 @@ export const Login = () => {
     password: "",
   });
   const [error, setError] = useState("");
+  const [requesting, setRequesting] = useState(false);
   const navigate = useNavigate();
   const { Login } = useAuth();
 
-  function formHandler(e) {
+  async function formHandler(e) {
     e.preventDefault();
-    Login(credential.email, credential.password)
-      .then(() => navigate("/"))
-      .catch((e) => {
-        setError(e.code);
-      });
+    try {
+      setRequesting(true);
+      await Login(credential.email, credential.password);
+      setRequesting(false);
+      navigate("/");
+    } catch (e) {
+      console.error(e);
+      setError(e.code);
+      setRequesting(false);
+    }
   }
 
   function credentialHandler(e) {
@@ -53,10 +59,12 @@ export const Login = () => {
             onChange={credentialHandler}
             required
           />
-          <button className="auth-btn">Login</button>
+          <button className={`auth-btn ${requesting ? "disabled" : ""}`}>
+            Login
+          </button>
         </form>
         {error && <div className="auth-error">{error}</div>}
-        <div className="auth-bottom">
+        <div className={`auth-bottom ${requesting ? "disabled" : ""}`}>
           <Link className="hello" to="/Signup">
             Create new account
           </Link>

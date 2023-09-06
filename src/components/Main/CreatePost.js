@@ -3,6 +3,7 @@ import { X, Image } from "phosphor-react";
 
 import { ModeContext } from "../../layouts/RootLayout.js";
 import { serverTimestamp } from "firebase/firestore";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 // custom hook
 import { useAuth } from "../../context/AuthProvider";
 
@@ -16,6 +17,8 @@ export const CreatePost = ({ newPostHandler }) => {
     auto: false,
   });
   const [mode, setMode] = useContext(ModeContext);
+  const [previewImage, setPreviewImage] = useState(null);
+  const [requesting, setRequesting] = useState(false);
 
   function inputHandler(e) {
     const { name, value, checked, type } = e.target;
@@ -28,51 +31,49 @@ export const CreatePost = ({ newPostHandler }) => {
     });
   }
 
-  function postHandler() {
+  async function postHandler() {
     if (!postData.text.length > 0) {
       textRef.current.focus();
       return;
     }
+    setRequesting(true);
+    const path =
+      previewImage && `${crypto.randomUUID()}-${previewImage.blobFile.name}`;
     const newPost = {
       name: currentUser.displayName,
       text: postData.text,
       auto: postData.auto,
-      image: postData.image,
+      image: path,
       createdAt: serverTimestamp(),
       impressions: 0,
       authorId: currentUser.uid,
     };
-
+    if (path) {
+      try {
+        const storage = getStorage();
+        const storageRef = ref(storage, `images/${path}`);
+        await uploadBytes(storageRef, previewImage.blobFile);
+        setRequesting(false);
+      } catch (e) {
+        console.log(e);
+        setRequesting(false);
+      }
+    }
     newPostHandler(newPost);
     setMode("");
   }
   function addImageHandler(e) {
     let imageFile = e.target.files[0];
 
-    const reader = new FileReader();
-
-    reader.onload = function (e) {
-      console.log(reader.result);
-      setPostData((prevData) => {
-        return {
-          ...prevData,
-          image: reader.result,
-          auto: false,
-        };
-      });
-    };
-
-    reader.readAsDataURL(imageFile);
+    setPreviewImage({
+      imageUrl: URL.createObjectURL(imageFile),
+      blobFile: imageFile,
+    });
   }
 
   function removeImageHandler(e) {
-    setPostData((prevData) => {
-      return {
-        ...prevData,
-        image: null,
-      };
-    });
-    // console.log(inputRef.current.value);
+    setPreviewImage(null);
+
     inputRef.current.value = null;
   }
 
@@ -90,10 +91,10 @@ export const CreatePost = ({ newPostHandler }) => {
           name="text"
           onChange={inputHandler}
         />
-        {postData.image && (
+        {previewImage && (
           // added event listener to after element by adding event to the whole div but demolishing the event through css on entire div and only enabling pointer events in the after pseudo element
           <div className="image-area" onClick={removeImageHandler}>
-            <img src={postData.image} width="120px" height="120px" />
+            <img src={previewImage.imageUrl} width="120px" height="120px" />
           </div>
         )}
       </div>
@@ -124,7 +125,9 @@ export const CreatePost = ({ newPostHandler }) => {
         </span>
       </div>
       <button
-        className={postData.text.length > 0 ? "post-active" : ""}
+        className={`${postData.text.length > 0 ? "post-active" : ""} ${
+          requesting ? "disabled" : ""
+        }`}
         onClick={postHandler}
       >
         Post

@@ -33,7 +33,8 @@ const router = createBrowserRouter(
       <Route path="signup" element={<Signup />} />
       <Route path="login" element={<Login />} />
     </Route>
-  )
+  ),
+  { basename: "/facebook-clone" }
 );
 
 export const App = () => {
