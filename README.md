@@ -10,7 +10,7 @@ Password: 123456
 
 ✔️ Upload and Delete Post  
 ✔️ Relative Time  
-✔️ Like Posts
+✔️ Like Posts  
 ✔️ Firestore Database    
 ✔️ Firebase auth and firebase storage  
 ✔️ Upload Images  
