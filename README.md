@@ -6,9 +6,13 @@
 Email: example@gmail.com  
 Password: 123456
 
+## Features 
+
 ✔️ Upload and Delete Post  
+✔️ Relative Time  
 ✔️ Like Posts
-✔️ Firestore Database, Firebase auth and firebase storage  
+✔️ Firestore Database    
+✔️ Firebase auth and firebase storage  
 ✔️ Upload Images  
 ❌ Update Posts
 
