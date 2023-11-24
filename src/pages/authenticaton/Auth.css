@@ -90,6 +90,12 @@
   color: white;
   text-decoration: none;
 }
+.bi-line {
+  display: block;
+  font-size: 16px;
+  text-align: center;
+  margin: 10px 0px;
+}
 
 .auth-error {
   font-size: 16px;
