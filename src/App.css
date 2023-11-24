@@ -119,8 +119,27 @@ body:has(.create, .edit) {
   background-color: #3a3b3c;
 }
 
-
 .disabled {
-  opacity: .6;
+  opacity: 0.6;
   pointer-events: none;
+}
+
+@media (max-width: 850px) {
+  .main {
+    width: auto;
+  }
+  .post-card_container {
+    width: 400px;
+  }
+}
+@media (max-width: 750px) {
+  .section-bottom {
+    grid-template-columns: auto;
+  }
+  .center-nav_container {
+    display: none !important;
+  }
+  .sticky-side_container {
+    display: none !important;
+  }
 }

@@ -318,3 +318,25 @@ label[for="input-file"] {
 /* .liked:hover {
   background-color: initial !important;
 } */
+
+@media (max-width: 850px) {
+  .create-post_container {
+    width: 400px;
+  }
+  .create-post_container textarea {
+    min-width: auto;
+    max-width: 100%;
+    /* max-width: 100%;
+    min-width: 100%; */
+  }
+}
+
+/* @media (max-width: 750px) {
+  .create-post_container {
+    width: 400px;
+  }
+  .create-post_container textarea {
+    min-width: auto;
+    max-width: 100%;
+  }
+} */
