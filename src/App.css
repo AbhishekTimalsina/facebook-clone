@@ -130,6 +130,7 @@ body:has(.create, .edit) {
   }
   .post-card_container {
     width: 400px;
+    overflow: hidden;
   }
 }
 @media (max-width: 750px) {
